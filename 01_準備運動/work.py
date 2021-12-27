@@ -1,0 +1,41 @@
+import re
+
+def ex00(s: str) -> str:
+  """入力単語を逆順に"""
+  return s[::-1]
+
+def ex01(s: str) -> str:
+  """奇数文字目を抜き出し(0-indexとする)"""
+  return s[1::2]
+
+def ex02(s1: str, s2: str) -> str:
+  """二つの引数を交互に連結"""
+  t = map(lambda x:x[0]+x[1], zip(s1, s2))
+  return "".join(t)
+
+def ex03(s: str) -> str:
+  """英文を単語に分解し各単語の文字数を先頭から出現順に並べたリストを作成"""
+  word_list = re.sub(r"[.,]", "", s.strip()).split(" ")
+  return list(map(lambda x: len(x), word_list))
+
+def ex04(s:str)->str:
+  """元素記号をこねくり回す"""
+  s = s.strip().split(" ")
+  one = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+  key = [v[:1] if i+1 in one else v[:2] for i,v in enumerate(s)]
+  return {k: v+1 for k,v in zip(key, range(len(key)))}
+
+def ex05():
+  pass
+
+def ex06():
+  pass
+
+def ex07():
+  pass
+
+def ex08():
+  pass
+
+def ex09():
+  pass
