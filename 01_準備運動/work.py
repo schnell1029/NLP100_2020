@@ -1,4 +1,5 @@
 import re
+from typing import Any, List
 
 def ex00(s: str) -> str:
   """入力単語を逆順に"""
@@ -25,10 +26,19 @@ def ex04(s:str)->str:
   key = [v[:1] if i+1 in one else v[:2] for i,v in enumerate(s)]
   return {k: v+1 for k,v in zip(key, range(len(key)))}
 
-def ex05():
-  pass
+def ex05(s:str, n:int=2)->List:
+  """一要素ずつずらしてタプルを作成するという方針で"""
+  return list(zip(*[s[i:] for i in range(2)]))
 
-def ex06():
+def ex06(s1:str, s2:str)->Any:
+  """set型を用いる"""
+  X = set(ex05(s1))
+  Y = set(ex05(s2))
+  print(f"和集合: {X|Y}")
+  print(f"積集合: {X&Y}")
+  print(f"差集合: {X-Y}")
+  print('Xにseが含まれるか:', {('s', 'e')} <= X)
+  print('Yにseが含まれるか:', {('s', 'e')} <= Y)
   pass
 
 def ex07():

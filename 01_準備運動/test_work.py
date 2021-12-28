@@ -36,3 +36,12 @@ New Nations Might Also Sign Peace Security Clause. Arthur King Can.
     'O': 8, 'F': 9, 'Ne': 10, 'Na': 11, 'Mi': 12, 'Al': 13, 'Si': 14, 'P': 15,
     'S': 16, 'Cl': 17, 'Ar': 18, 'K': 19, 'Ca': 20}
   assert ex04(arg) == expected
+
+def test_ex05():
+  arg = "I am an NLPer"
+  expected = [('I', ' '), (' ', 'a'), ('a', 'm'), ('m', ' '), (' ', 'a'),
+              ('a', 'n'), ('n', ' '), (' ', 'N'), ('N', 'L'), ('L', 'P'),
+              ('P', 'e'), ('e', 'r')]
+  assert ex05(arg) == expected
+  expected = [('I', 'am'), ('am', 'an'), ('an', 'NLPer')]
+  assert ex05(arg.split()) == expected
