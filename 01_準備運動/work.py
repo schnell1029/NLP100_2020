@@ -41,11 +41,14 @@ def ex06(s1:str, s2:str)->Any:
   print('Yにseが含まれるか:', {('s', 'e')} <= Y)
   pass
 
-def ex07():
-  pass
+def ex07(x,y,z)->str:
+  return f"{x}時の{y}は{z}"
 
-def ex08():
-  pass
+def ex08(s:str)->str:
+  """英小文字をUnicodeの整数値によって置換
+  英小文字はUnicodeにおいて[97, 122]なのでex08を2回通せば元の文に戻る"""
+  s = [chr(219-ord(v)) if v.islower() else v for v in s]
+  return "".join(s)
 
 def ex09():
   pass

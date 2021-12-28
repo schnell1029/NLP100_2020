@@ -45,3 +45,14 @@ def test_ex05():
   assert ex05(arg) == expected
   expected = [('I', 'am'), ('am', 'an'), ('an', 'NLPer')]
   assert ex05(arg.split()) == expected
+
+def test_ex07():
+  arg = 12, "気温", 22.4
+  expected = "12時の気温は22.4"
+  assert ex07(*arg) == expected
+
+def test_ex08():
+  arg = "Done is better than perfect!"
+  expected = "Dlmv rh yvggvi gszm kviuvxg!"
+  assert ex08(arg) == expected
+  assert ex08(expected) == arg
