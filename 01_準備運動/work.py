@@ -1,4 +1,5 @@
 import re
+import random
 from typing import Any, List
 
 def ex00(s: str) -> str:
@@ -50,5 +51,12 @@ def ex08(s:str)->str:
   s = [chr(219-ord(v)) if v.islower() else v for v in s]
   return "".join(s)
 
-def ex09():
-  pass
+def ex09(words: str) -> str:
+  def shuffle(word: str) -> str:
+    if len(word) > 4:
+      res = word[0] + "".join(random.sample(word[1:-1], len(word)-2)) \
+                    + word[len(word)-1]
+    else:
+      res = word
+    return res
+  return " ".join(map(shuffle, words.split()))
