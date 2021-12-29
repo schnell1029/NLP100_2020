@@ -1,3 +1,4 @@
+from os import sep
 import subprocess
 import re
 
@@ -37,3 +38,19 @@ def ex12(file_name:str="popular-names.txt"):
   df.to_csv(path_or_buf="col2.txt", sep="\t", columns=[1],
             header=False, index=False)
 
+def ex13():
+  """カラムの結合
+
+  Unixコマンドでの処理
+    paste -d"\t" col1.txt col2.txt > col1-2_paste.txt
+  """
+
+  df1=pd.read_table("col1.txt", header=None)
+  df2=pd.read_table("col2.txt", header=None)
+
+  # df1.shape -> (2780, 1)
+  # axis=0なら要素数2780の方の次元で連結する
+  # axis=1なら要素数1の方の次元で連結する
+  df = pd.concat([df1, df2], axis=1)
+
+  df.to_csv(path_or_buf="col1-2.txt", sep="\t", header=False, index=False)
