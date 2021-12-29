@@ -54,3 +54,13 @@ def ex13():
   df = pd.concat([df1, df2], axis=1)
 
   df.to_csv(path_or_buf="col1-2.txt", sep="\t", header=False, index=False)
+
+def ex14(n:int=10, file_name:str="popular-names.txt"):
+  """ファイルの先頭n行を表示
+
+  Unixコマンドでの処理
+    head -nN popular-names.txt
+  """
+  with open(file_name) as file:
+    for i in range(n):
+      print(file.readline().strip())
