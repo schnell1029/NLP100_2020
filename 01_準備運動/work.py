@@ -12,13 +12,12 @@ def ex01(s: str) -> str:
 
 def ex02(s1: str, s2: str) -> str:
   """二つの引数を交互に連結"""
-  t = map(lambda x:x[0]+x[1], zip(s1, s2))
-  return "".join(t)
+  return "".join([f+s for f, s in zip(s1, s2)])
 
 def ex03(s: str) -> str:
   """英文を単語に分解し各単語の文字数を先頭から出現順に並べたリストを作成"""
   word_list = re.sub(r"[.,]", "", s.strip()).split(" ")
-  return list(map(lambda x: len(x), word_list))
+  return list(map(len, word_list))
 
 def ex04(s:str)->str:
   """元素記号をこねくり回す"""
