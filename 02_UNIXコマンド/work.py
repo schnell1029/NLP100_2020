@@ -56,7 +56,7 @@ def ex13():
   df.to_csv(path_or_buf="col1-2.txt", sep="\t", header=False, index=False)
 
 def ex14(n:int=10, file_name:str="popular-names.txt"):
-  """ファイルの先頭n行を表示
+  """ファイルの先頭N行を表示
 
   Unixコマンドでの処理
     head -nN popular-names.txt
@@ -64,3 +64,15 @@ def ex14(n:int=10, file_name:str="popular-names.txt"):
   with open(file_name) as file:
     for i in range(n):
       print(file.readline().strip())
+
+
+def ex15(n:int=10, file_name:str="popular-names.txt"):
+  """ファイルの末尾N行を出力
+
+  Unixコマンドでの処理
+    tail -nN popular-names.txt
+  """
+
+  # tailの実装ってどうなってるんだろう
+  df = pd.read_csv(file_name, delimiter="\t", header=None)
+  print(df.tail(10))
