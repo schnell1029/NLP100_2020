@@ -30,8 +30,8 @@ def ex05(s:str, n:int=2)->List:
   """一要素ずつずらしてタプルを作成するという方針で"""
   return list(zip(*[s[i:] for i in range(2)]))
 
-def ex06(s1:str, s2:str)->Any:
-  """set型を用いる"""
+def ex06(s1:str, s2:str):
+  """集合演算"""
   X = set(ex05(s1))
   Y = set(ex05(s2))
   print(f"和集合: {X|Y}")
@@ -39,7 +39,6 @@ def ex06(s1:str, s2:str)->Any:
   print(f"差集合: {X-Y}")
   print('Xにseが含まれるか:', {('s', 'e')} <= X)
   print('Yにseが含まれるか:', {('s', 'e')} <= Y)
-  pass
 
 def ex07(x,y,z)->str:
   return f"{x}時の{y}は{z}"

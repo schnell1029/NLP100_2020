@@ -1,3 +1,4 @@
+import collections
 from os import sep
 import subprocess
 import re
@@ -139,4 +140,24 @@ def ex18_pd(file_name:str="popular-names.txt"):
   """ex18のpandasを用いた回答"""
   df = pd.read_csv(file_name, sep="\t", header=None)
   print(df.sort_values(2, ascending=False))
+  return
+
+def ex19(file_name:str="popular-names.txt"):
+  """各行の単語列の出現頻度を求めて頻度の高い順に並びかえ
+
+  Unixコマンドによる処理
+    cut -f 1 popular-names.txt | sort | uniq -c | sort -k1rn
+  """
+  names = []
+  with open(file_name) as file:
+    names = [row.strip().split()[0] for row in file]
+  c = collections.Container(names)
+  names = sorted(c.items(), key=lambda x:x[1], reverse=True)
+  print(*names, sep="\n")
+  return
+
+def ex19_pd(file_name:str="popular-names.txt"):
+  """ex19のpandasを用いた回答"""
+  df = pd.read_csv(file_name, sep="\t", header=None)
+  print(df[0].value_counts())
   return
