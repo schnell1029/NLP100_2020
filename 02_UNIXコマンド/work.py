@@ -76,3 +76,25 @@ def ex15(n:int=10, file_name:str="popular-names.txt"):
   # tailの実装ってどうなってるんだろう
   df = pd.read_csv(file_name, delimiter="\t", header=None)
   print(df.tail(10))
+
+def ex16(N:int=10, file_name:str="popular-names.txt"):
+  """ファイルをN分割
+
+  Unixコマンドによる処理
+  N="分割数"
+  n=`wc -l popular-names.txt | awk '{print $1}'`
+  ln=`expr $n / $N + 1`
+  split -l $ln popular-names.txt
+  """
+  # 行数を取得
+  line_count = 0
+  with open(file_name) as file:
+    line_count = len([1 for _ in file])
+  ln = line_count // N + 1
+
+  with open(file_name) as file:
+    for prefix in range(N):
+      with open(f"{prefix}_splited.txt", "w") as fout:
+        for _ in range(ln):
+          fout.write(file.readline())
+  return
