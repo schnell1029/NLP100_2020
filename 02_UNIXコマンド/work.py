@@ -81,10 +81,10 @@ def ex16(N:int=10, file_name:str="popular-names.txt"):
   """ファイルをN分割
 
   Unixコマンドによる処理
-  N="分割数"
-  n=`wc -l popular-names.txt | awk '{print $1}'`
-  ln=`expr $n / $N + 1`
-  split -l $ln popular-names.txt
+    N="分割数"
+    n=`wc -l popular-names.txt | awk '{print $1}'`
+    ln=`expr $n / $N + 1`
+    split -l $ln popular-names.txt
   """
   # 行数を取得
   line_count = 0
@@ -98,3 +98,15 @@ def ex16(N:int=10, file_name:str="popular-names.txt"):
         for _ in range(ln):
           fout.write(file.readline())
   return
+
+def ex17(file_name:str="popular-names.txt"):
+  """1列目の要素集合を求める
+
+  Unixコマンドによる処理
+    cut -f 1 popular-names.txt | sort | uniq
+  """
+  with open(file_name) as file:
+    names = set(row.strip().split()[0] for row in file)
+    # 目的は上の時点で達成しているがsetは表示順が毎回異なりソート不可なので
+    names = sorted(list(names))
+    print(*names, sep="\n")
