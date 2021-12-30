@@ -110,3 +110,33 @@ def ex17(file_name:str="popular-names.txt"):
     # 目的は上の時点で達成しているがsetは表示順が毎回異なりソート不可なので
     names = sorted(list(names))
     print(*names, sep="\n")
+  return
+
+def ex17_pd(file_name:str="popular-names.txt"):
+  """ex17のpandasを用いた回答"""
+  df = pd.read_csv(file_name, sep="\t", header=None)
+  names = sorted(df[0].unique())
+  print(*names, sep="\n")
+  return
+
+def ex18(file_name:str="popular-names.txt"):
+  """ファイルの内容を行単位で並び替え
+
+  Unixコマンドによる処理
+    sort -k 3nr popular-names.txt
+  """
+
+  data = []
+  with open(file_name) as file:
+    data = [row.strip().split() for row in file]
+  data = sorted(data, key=lambda x: int(x[2]), reverse=True)
+  # 表示を合わせるための処理
+  data = ["\t".join(row) for row in data]
+  print(*data, sep="\n")
+  return
+
+def ex18_pd(file_name:str="popular-names.txt"):
+  """ex18のpandasを用いた回答"""
+  df = pd.read_csv(file_name, sep="\t", header=None)
+  print(df.sort_values(2, ascending=False))
+  return
