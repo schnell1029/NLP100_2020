@@ -2,6 +2,7 @@ import collections
 from os import sep
 import subprocess
 import re
+from collections import deque
 
 import pandas as pd
 
@@ -45,15 +46,18 @@ def ex13():
   Unixコマンドでの処理
     paste -d"\t" col1.txt col2.txt > col1-2_paste.txt
   """
+  with open("col1.txt") as f1, open("col2.txt") as f2, \
+       open("col1-2.txt", "w") as fout:
+    for col1, col2 in zip(f1, f2):
+      fout.write(col1.strip() + "\t" + col2)
 
+def ex13_pd():
+  """ex13のpandasによる実装"""
   df1=pd.read_table("col1.txt", header=None)
   df2=pd.read_table("col2.txt", header=None)
-
   # df1.shape -> (2780, 1)
-  # axis=0なら要素数2780の方の次元で連結する
-  # axis=1なら要素数1の方の次元で連結する
+  # axis=0なら要素数2780の方の次元で連結する, axis=1なら要素数1の方の次元で連結する(超大切)
   df = pd.concat([df1, df2], axis=1)
-
   df.to_csv(path_or_buf="col1-2.txt", sep="\t", header=False, index=False)
 
 def ex14(n:int=10, file_name:str="popular-names.txt"):
@@ -66,6 +70,10 @@ def ex14(n:int=10, file_name:str="popular-names.txt"):
     for i in range(n):
       print(file.readline().strip())
 
+def ex14_pd(n:int=10, file_name:str="popular-names.txt"):
+  """ex14のpandasによる実装"""
+  df = pd.read_csv(file_name, delimiter="\t", header=None)
+  print(df.head(n))
 
 def ex15(n:int=10, file_name:str="popular-names.txt"):
   """ファイルの末尾N行を出力
@@ -73,8 +81,13 @@ def ex15(n:int=10, file_name:str="popular-names.txt"):
   Unixコマンドでの処理
     tail -nN popular-names.txt
   """
+  q = deque([], n)
+  with open(file_name) as file:
+    [q.append(line) for line in file]
+    [print(line.strip()) for line in q]
 
-  # tailの実装ってどうなってるんだろう
+def ex15_pd(n:int=10, file_name:str="popular-names.txt"):
+  """ex15のpandasによる実装"""
   df = pd.read_csv(file_name, delimiter="\t", header=None)
   print(df.tail(10))
 

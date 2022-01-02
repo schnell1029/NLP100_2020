@@ -50,6 +50,7 @@ def ex08(s:str)->str:
   return "".join(s)
 
 def ex09(words: str) -> str:
+  """先頭末尾以外の文字をシャッフル"""
   def shuffle(word: str) -> str:
     if len(word) > 4:
       res = word[0] + "".join(random.sample(word[1:-1], len(word)-2)) \
