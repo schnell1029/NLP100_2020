@@ -2,7 +2,7 @@ import collections
 from os import sep
 import subprocess
 import re
-from collections import deque
+from collections import deque, Counter
 
 import pandas as pd
 
@@ -113,6 +113,14 @@ def ex16(N:int=10, file_name:str="popular-names.txt"):
           fout.write(file.readline())
   return
 
+def ex16_pd(N:int=10, file_name:str="popular-names.txt"):
+  """ex16のpandasによる実装"""
+  df = pd.read_csv(file_name, sep="\t", header=None)
+  ln = len(df) // N + 1
+  for i in range(N):
+    df.iloc[ln*i:ln*(i+1)].to_csv(f"{i}_splited-pd.txt", sep="\t",
+                                  index=False, header=None)
+
 def ex17(file_name:str="popular-names.txt"):
   """1列目の要素集合を求める
 
@@ -129,6 +137,7 @@ def ex17(file_name:str="popular-names.txt"):
 def ex17_pd(file_name:str="popular-names.txt"):
   """ex17のpandasを用いた回答"""
   df = pd.read_csv(file_name, sep="\t", header=None)
+  # df[]で列を切り出せる、df.iloc[]で行を切り出せる。
   names = sorted(df[0].unique())
   print(*names, sep="\n")
   return
@@ -164,7 +173,7 @@ def ex19(file_name:str="popular-names.txt"):
   names = []
   with open(file_name) as file:
     names = [row.strip().split()[0] for row in file]
-  c = collections.Container(names)
+  c = Counter(names)
   names = sorted(c.items(), key=lambda x:x[1], reverse=True)
   print(*names, sep="\n")
   return
